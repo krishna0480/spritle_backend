@@ -13,13 +13,13 @@ export class WebhookService {
 
     // ── Receive and save an incoming Freshdesk webhook ────────────────────
     async receiveWebhook(payload: Record<string, any>): Promise<void> {
-        // Freshdesk sends event info in the payload root.
-        // Common fields: freshdesk_webhook, ticket_id, etc.
-        // We try to read event type from the payload; fall back to "unknown"
+        // ✅ Extract event type from all possible Freshdesk payload formats
         const eventType =
             payload?.freshdesk_webhook?.type ??
             payload?.event ??
             payload?.type ??
+            payload?.action ??
+            payload?.trigger ??
             'unknown';
 
         await this.webhookLogModel.create({
@@ -27,7 +27,7 @@ export class WebhookService {
             payload,
         });
 
-        console.log(`[Webhook] Received event: ${eventType}`);
+        console.log(`[Webhook] Received event: ${eventType}`, JSON.stringify(payload, null, 2));
     }
 
     // ── Fetch all logs (newest first) ─────────────────────────────────────
