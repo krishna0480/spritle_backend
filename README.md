@@ -90,17 +90,30 @@ HUBSPOT_REDIRECT_URI=http://localhost:3000/hubspot/callback
 ```
 
 ### `.env.sample`
+# ─── Database ─────────────────────────────────────────────────────────────────
+DB_URI=mongodb://localhost:27017/spritle
 
-```env
-DB_URI=
-JWT_SECRET=
+# ─── JWT ──────────────────────────────────────────────────────────────────────
+JWT_SECRET=my_super_secret_jwt_key_change_this
 JWT_EXPIRE=1d
-FRESHDESK_API_KEY=
-FRESHDESK_DOMAIN=
-HUBSPOT_CLIENT_ID=
-HUBSPOT_CLIENT_SECRET=
-HUBSPOT_REDIRECT_URI=
-```
+
+# ─── Freshdesk ────────────────────────────────────────────────────────────────
+# API key from: Freshdesk → Profile Picture → Profile Settings
+# Domain: only the subdomain e.g. "acme" not "acme.freshdesk.com"
+FRESHDESK_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+FRESHDESK_DOMAIN=acme
+
+# ─── HubSpot OAuth ────────────────────────────────────────────────────────────
+# From: developers.hubspot.com → Apps → Your App → Auth tab
+# Required scopes: crm.objects.contacts.read, crm.objects.contacts.write, oauth
+HUBSPOT_CLIENT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+HUBSPOT_CLIENT_SECRET=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+HUBSPOT_REDIRECT_URI=http://localhost:3000/hubspot/callback
+
+# ─── App ──────────────────────────────────────────────────────────────────────
+# Local:      http://localhost:3001
+# Production: https://spritle-backend-fpp4.onrender.com
+PORT=3001
 
 ---
 
